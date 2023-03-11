@@ -71,7 +71,7 @@ public:
         strcpy(programlang, programlang_);
     }
 
-    void setexperience(short experience_)
+    void setexperience(const short experience_)
     {
         experience = experience_;
     }
