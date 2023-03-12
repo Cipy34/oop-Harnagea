@@ -125,7 +125,7 @@ std::istream &operator>>(std::istream &is, Employee &rhs)
     return is;
 }
 int main() {
-    int n, nremployees=3;
+    int nremployees=3;
     Employee *e = new Employee[3];
 
     e[0].setname("Bill Gates");
@@ -147,6 +147,7 @@ int main() {
     std::cout<<"3 - Change program language and level of experience"<<"\n";
     std::cout<<"4 - Display the employees"<<"\n";
 
+    int n;
     std::cin>>n;
     std::cin.get();
 
@@ -219,7 +220,6 @@ int main() {
                 {
                     e[i].setprogramlang(program);
                     e[i].setexperience(exp);
-                    k=1;
                     break;
                 }
             break;
@@ -236,5 +236,6 @@ int main() {
     std::cin>>n;
     if(n==1)
         goto start;
+    delete[] e;
     return 0;
 }
