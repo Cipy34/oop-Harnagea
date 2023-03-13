@@ -10,8 +10,8 @@ public:
     Employee()
     {
         experience = 0;
-        name = new char[0];
-        programlang = new char[0];
+        name = nullptr;
+        programlang = nullptr;
     }
 
     Employee(const char *name_, const char *programlang_, short experience_)
@@ -33,12 +33,12 @@ public:
     }
 
     bool operator != (const Employee &rhs)
-    {
+    const {
         return experience != rhs.experience || strcmp(name, rhs.name)!=0 || strcmp(programlang, rhs.programlang)!=0;
     }
 
     bool operator == (const Employee &rhs)
-    {
+    const {
         return experience == rhs.experience && strcmp(name, rhs.name) == 0 && strcmp(programlang, rhs.programlang) == 0;
     }
 
@@ -76,22 +76,22 @@ public:
         experience = experience_;
     }
 
-    char *getname()
-    {
+    const char *getname()
+    const {
         return name;
     }
 
-    char *getprogramlang()
-    {
+    const char *getprogramlang()
+    const {
         return programlang;
     }
 
     short getexperience()
-    {
+    const {
         return experience;
     }
 
-    ~Employee()
+    ~Employee() //destructor
     {
         delete[]name;
         delete[]programlang;
@@ -140,19 +140,18 @@ int main() {
     e[2].setprogramlang("Typescript");
     e[2].setexperience(5);
 
-    int n = 1;
-    while(n == 1)
-    {
-        std::cout<<"1 - Add employee"<<"\n";
-        std::cout<<"2 - Remove employee"<<"\n";
-        std::cout<<"3 - Change program language and level of experience"<<"\n";
-        std::cout<<"4 - Display the employees"<<"\n";
+    start:
 
-        int q;
-        std::cin>>q;
-        std::cin.get();
+    std::cout<<"1 - Add employee"<<"\n";
+    std::cout<<"2 - Remove employee"<<"\n";
+    std::cout<<"3 - Change program language and level of experience"<<"\n";
+    std::cout<<"4 - Display the employees"<<"\n";
+    std::cout<<"0 - Exit The program"<<"\n";
 
-        switch(q)
+    int n;
+    std::cin>>n;
+    std::cin.get();
+    switch(n)
         {
             case 1:
             {
@@ -231,11 +230,13 @@ int main() {
                 std::cout<<"\n";
                 break;
         }
-        std::cout<<"0 - Close the program"<<"\n";
-        std::cout<<"1 - Go back to menu"<<"\n";
 
-        std::cin>>n;
-    }
+    std::cout<<"0 - Close the program"<<"\n";
+    std::cout<<"1 - Go back to menu"<<"\n";
+    std::cin>>n;
+
+    if(n==1)
+        goto start;
 
     delete[] e;
     return 0;
